@@ -2,8 +2,8 @@ import React from 'react';
 import {createStackNavigator} from 'react-navigation-stack';
 import ProductView from './page/ProductView';
 import OverviewPage from './page/OverviewPage';
-import Regform from './page/Regform';
-import Logform from './page/Logform';
+import RegistryForm from './page/RegistryForm';
+import LoginForm from './page/LoginForm';
 
 const AppNavigator = createStackNavigator({
   Home: {
@@ -11,6 +11,12 @@ const AppNavigator = createStackNavigator({
   },
   Product: {
     screen: ProductView,
+  },
+  Registry: {
+    screen: RegistryForm,
+  },
+  Login: {
+    screen: LoginForm,
   },
 });
 

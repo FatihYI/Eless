@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
-import {StyleSheet, TouchableOpacity, View, FlatList} from 'react-native';
+import {StyleSheet, TouchableOpacity, View, FlatList, Text} from 'react-native';
 import OverviewCard from '../components/OverviewCard';
+import ActionButton from 'react-native-action-button';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 class OverviewPage extends Component {
   render() {
@@ -64,6 +66,15 @@ class OverviewPage extends Component {
           keyExtractor={(item) => item.id}
           numColumns={2}
         />
+
+        <ActionButton
+          onPress={() => {
+            this.props.navigation.navigate('Registry');
+          }}
+          offsetY={5}
+          offsetX={5}
+          buttonColor="rgba(231,76,60,1)"
+        />
       </>
     );
   }
@@ -79,6 +90,11 @@ const styles = StyleSheet.create({
     paddingRight: 5,
     paddingBottom: 10,
     width: '50%',
+  },
+  actionButtonIcon: {
+    fontSize: 20,
+    height: 22,
+    color: 'white',
   },
 });
 
