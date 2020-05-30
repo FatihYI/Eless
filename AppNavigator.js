@@ -4,10 +4,11 @@ import ProductView from './page/ProductView';
 import OverviewPage from './page/OverviewPage';
 import RegistryForm from './page/RegistryForm';
 import LoginForm from './page/LoginForm';
+import PlaceView from './page/PlaceView';
 
 const AppNavigator = createStackNavigator({
   Home: {
-    screen: OverviewPage,
+    screen: PlaceView,
   },
   Product: {
     screen: ProductView,
