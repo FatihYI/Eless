@@ -4,7 +4,6 @@ import ProductView from './page/ProductView';
 import OverviewPage from './page/OverviewPage';
 import RegistryForm from './page/RegistryForm';
 import LoginForm from './page/LoginForm';
-import PlaceView from './page/PlaceView';
 import CityView from './page/CityView';
 const AppNavigator = createStackNavigator({
   Home: {
@@ -19,7 +18,7 @@ const AppNavigator = createStackNavigator({
   Login: {
     screen: LoginForm,
   },
-  CityView:{
+  CityView: {
     screen: CityView,
   },
 });
