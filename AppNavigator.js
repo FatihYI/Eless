@@ -5,6 +5,10 @@ import OverviewPage from './page/OverviewPage';
 import RegistryForm from './page/RegistryForm';
 import LoginForm from './page/LoginForm';
 import CityView from './page/CityView';
+import ProductRegistryImage from './page/ProductRegistryImage';
+import ProductRegistryInformation from './page/ProductRegistryInformation';
+import ProductRegistryDescription from './page/ProductRegistryDescription';
+import ProductRegistryOverview from './page/ProductRegistryOverview';
 const AppNavigator = createStackNavigator({
   Home: {
     screen: OverviewPage,
@@ -20,6 +24,18 @@ const AppNavigator = createStackNavigator({
   },
   CityView: {
     screen: CityView,
+  },
+  ProductRegistryImage: {
+    screen: ProductRegistryImage,
+  },
+  ProductRegistryInformation: {
+    screen: ProductRegistryInformation,
+  },
+  ProductRegistryDescription: {
+    screen: ProductRegistryDescription,
+  },
+  ProductRegistryOverview: {
+    screen: ProductRegistryOverview,
   },
 });
 

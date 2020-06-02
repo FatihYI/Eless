@@ -173,6 +173,7 @@ class OverviewPage extends Component {
           renderItem={({item}) => (
             <View style={styles.cardContainer}>
               <TouchableOpacity
+                //ToDo Product array (Item) an ProductView übergeben
                 onPress={() => this.props.navigation.navigate('Product')}>
                 <OverviewCard
                   place={item.place}
@@ -188,7 +189,7 @@ class OverviewPage extends Component {
 
         <ActionButton
           onPress={() => {
-            this.props.navigation.navigate('Registry');
+            this.props.navigation.navigate('ProductRegistryImage');
           }}
           offsetY={5}
           offsetX={5}
