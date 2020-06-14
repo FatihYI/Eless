@@ -1,26 +1,16 @@
 import React, {Component} from 'react';
-import {ScrollView, StyleSheet, Text, View} from 'react-native';
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 
 class ProductRegistryOverview extends Component {
-  // overview = () => {
-  //   if (this.props.navigation.state.params) {
-  //     if (this.props.navigation.state.params.productRegistry) {
-  //       const {
-  //         productRegistry,
-  //       } = this.props.navigation.state.params.productRegistry;
-  //       return (
-  //         <View>
-  //           <Text>{productRegistry.information.name}</Text>
-  //           <Text>{productRegistry.information.price}</Text>
-  //           <Text>{productRegistry.information.place}</Text>
-  //           <Text>{productRegistry.description.productDescription}</Text>
-  //           <Text>{productRegistry.description.productCheckHelal}</Text>
-  //           <Text>{productRegistry.description.productCheckVegetabler}</Text>
-  //         </View>
-  //       );
-  //     }
-  //   }
-  // };
+  constructor() {
+    super();
+  }
 
   render() {
     const productRegistryInf = this.props.navigation.state.params
@@ -58,6 +48,13 @@ class ProductRegistryOverview extends Component {
             <Text style={styles.textinput}>
               {productRegistryDes.productCheckVegetabler}
             </Text>
+
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => {
+              }}>
+              <Text style={styles.btntext}>Fertig</Text>
+            </TouchableOpacity>
           </View>
         </View>
       </ScrollView>

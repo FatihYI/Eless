@@ -1,12 +1,5 @@
 import React, {Component} from 'react';
-import {
-  StyleSheet,
-  TouchableOpacity,
-  View,
-  FlatList,
-  Text,
-  Alert,
-} from 'react-native';
+import {StyleSheet, TouchableOpacity, View, FlatList, Text} from 'react-native';
 import OverviewCard from '../components/OverviewCard';
 import ActionButton from 'react-native-action-button';
 import {SearchBar, Icon} from 'react-native-elements';
@@ -49,7 +42,7 @@ class OverviewPage extends Component {
     }
   };
 
-  test = () => {
+  displaySelectedPlace = () => {
     //alert('testMethod');
     if (this.props.navigation.state.params) {
       if (this.props.navigation.state.params.selectedPlace) {
@@ -163,9 +156,14 @@ class OverviewPage extends Component {
           name="heartbeat"
           type="font-awesome"
           color="#f50"
-          onPress={() => this.props.navigation.navigate('CityView')}
+          onPress={() => {
+            // fetch('http://192.168.0.36:3000/user')
+            //   .then((response) => response.json())
+            //   .then((user) => console.warn(user));
+            this.props.navigation.navigate('CityView');
+          }}
         />
-        {this.test()}
+        {this.displaySelectedPlace()}
 
         <FlatList
           data={this.filterPlaces(DATA)}
