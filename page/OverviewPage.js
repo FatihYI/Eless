@@ -4,6 +4,7 @@ import OverviewCard from '../components/OverviewCard';
 import ActionButton from 'react-native-action-button';
 import {SearchBar, Icon} from 'react-native-elements';
 import _ from 'lodash';
+import awaitAsyncGenerator from '@babel/runtime/helpers/esm/awaitAsyncGenerator';
 
 class OverviewPage extends Component {
   constructor(props) {
@@ -65,6 +66,26 @@ class OverviewPage extends Component {
       }
     }
   };
+
+  async test() {
+    await fetch('http://192.168.0.36:3000/getProducts', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        username: 'Kullanici adi',
+      }),
+    })
+      .then(async (response) => await response.json())
+      .then((res) => {
+        if (res.message) {
+          console.warn(res.message);
+        }
+      })
+      .done();
+  }
 
   render() {
     const {search} = this.state;
@@ -157,10 +178,23 @@ class OverviewPage extends Component {
           type="font-awesome"
           color="#f50"
           onPress={() => {
-            // fetch('http://192.168.0.36:3000/user')
+            // fetch('http://192.168.0.36:3000/users', {
+            //   method: 'POST',
+            //   header: {
+            //     'Content-Type': 'application/json',
+            //   },
+            //   body: JSON.stringify({
+            //     username: 'Kullaniciadi',
+            //   }),
+            // })
             //   .then((response) => response.json())
-            //   .then((user) => console.warn(user));
-            this.props.navigation.navigate('CityView');
+            //   .then((res) => {
+            //     if (res.message) {
+            //       console.warn(res.message);
+            //     }
+            //   })
+            //   .done();
+            this.test();
           }}
         />
         {this.displaySelectedPlace()}
@@ -187,7 +221,7 @@ class OverviewPage extends Component {
 
         <ActionButton
           onPress={() => {
-            this.props.navigation.navigate('ProductRegistryImage');
+            this.props.navigation.navigate('Registry');
           }}
           offsetY={5}
           offsetX={5}
