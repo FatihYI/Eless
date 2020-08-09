@@ -9,6 +9,9 @@ import ProductRegistryImage from './page/ProductRegistryImage';
 import ProductRegistryInformation from './page/ProductRegistryInformation';
 import ProductRegistryDescription from './page/ProductRegistryDescription';
 import ProductRegistryOverview from './page/ProductRegistryOverview';
+import UserView from './page/UserView';
+import {createDrawerNavigator} from 'react-navigation-drawer';
+
 const AppNavigator = createStackNavigator({
   Home: {
     screen: OverviewPage,
@@ -36,6 +39,21 @@ const AppNavigator = createStackNavigator({
   },
   ProductRegistryOverview: {
     screen: ProductRegistryOverview,
+  },
+  UserView: {
+    screen: UserView,
+  },
+});
+
+const Drawer = createDrawerNavigator({
+  a: {
+    screen: OverviewPage,
+  },
+  b: {
+    screen: ProductView,
+  },
+  c: {
+    screen: RegistryForm,
   },
 });
 

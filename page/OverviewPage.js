@@ -5,18 +5,28 @@ import ActionButton from 'react-native-action-button';
 import {SearchBar, Icon} from 'react-native-elements';
 import _ from 'lodash';
 import awaitAsyncGenerator from '@babel/runtime/helpers/esm/awaitAsyncGenerator';
+import AsyncStorage from '@react-native-community/async-storage';
+import {DrawerNavigator} from 'react-navigation';
+import LoginForm from './LoginForm';
 
 class OverviewPage extends Component {
   constructor(props) {
     super(props);
     this.selectedPlaceIsSet = false;
+    //this.isLoggedIn;
+    //AsyncStorage.setItem('isLoggedIn', 'false');
+    //console.warn(AsyncStorage.getItem('isLoggedIn'));
+    //if (!AsyncStorage.getItem('isLoggedIn')) {
+    //AsyncStorage.setItem('isLoggedIn', 'true');
+    //console.warn(AsyncStorage.getItem('isLoggedIn'));
+    //}
+    this.initLoginStatus();
   }
-
   state = {
     search: '',
     refresh: false,
+    refreshLogin: false,
   };
-
   updateSearch = (search) => {
     this.setState({search});
   };
@@ -68,10 +78,11 @@ class OverviewPage extends Component {
   };
 
   async test() {
-    await fetch('http://192.168.0.36:3000/getProducts', {
+    //connect to backend
+    await fetch('http://192.168.0.210:3000/getProducts', {
       method: 'POST',
       headers: {
-        'Accept': 'application/json',
+        Accept: 'application/json',
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
@@ -86,6 +97,64 @@ class OverviewPage extends Component {
       })
       .done();
   }
+  //brauchen wir nicht wenn wir set und get aus logAPI verwenden
+  checkLogin = async () => {
+    const {refreshLogin} = this.state;
+
+    try {
+      this.isLoggedIn = await AsyncStorage.getItem('isLoggedIn');
+      if (this.isLoggedIn !== 'true' && refreshLogin === false) {
+        //this.isLoggedIn = logInfo;
+        //await AsyncStorage.setItem('isLoggedIn', 'true');
+        this.isLoggedIn = 'true';
+        //console.warn('checkLogin: ' + this.isLoggedIn);
+        this.setState({refreshLogin: true});
+      }
+      console.warn('isLoggedIn Variable: ' + this.isLoggedIn);
+    } catch (err) {
+      console.warn(err);
+    }
+  };
+
+  async logout() {
+    try {
+      //await AsyncStorage.setItem('isLoggedIn', this.isLoggedIn.toString());
+
+      if ((await AsyncStorage.getItem('isLogged')) === 'true') {
+        await AsyncStorage.setItem('loginData', '');
+        await AsyncStorage.setItem('isLogged', 'false');
+
+        alert('Sie sind nun abgemeldet');
+      } else {
+        alert('Sie sind bereits abgemeldet');
+      }
+      return true;
+    } catch (exception) {
+      return false;
+    }
+  }
+
+  initLoginStatus = async () => {
+    const {refresh} = this.state;
+    let isLogged = await AsyncStorage.getItem('isLogged');
+    if (isLogged === null) {
+      await AsyncStorage.setItem('isLogged', 'false');
+    }
+    console.warn(
+      'initloginStatus: ' + (await AsyncStorage.getItem('isLogged')),
+    );
+    //console.warn(isLogged);
+  };
+
+  getLoginStatus = async () => {
+    let a = await AsyncStorage.getItem('isLogged');
+    console.warn('getLogin: ' + a);
+    if (a === 'false') {
+      this.props.navigation.navigate('Login');
+    } else if (a === 'true') {
+      this.props.navigation.navigate('UserView');
+    }
+  };
 
   render() {
     const {search} = this.state;
@@ -178,23 +247,16 @@ class OverviewPage extends Component {
           type="font-awesome"
           color="#f50"
           onPress={() => {
-            // fetch('http://192.168.0.36:3000/users', {
-            //   method: 'POST',
-            //   header: {
-            //     'Content-Type': 'application/json',
-            //   },
-            //   body: JSON.stringify({
-            //     username: 'Kullaniciadi',
-            //   }),
-            // })
-            //   .then((response) => response.json())
-            //   .then((res) => {
-            //     if (res.message) {
-            //       console.warn(res.message);
-            //     }
-            //   })
-            //   .done();
             this.test();
+          }}
+        />
+        <Icon
+          raised
+          name="heartbeat2"
+          type="font-awesome"
+          color="#f50"
+          onPress={() => {
+            alert('dsa');
           }}
         />
         {this.displaySelectedPlace()}
@@ -221,10 +283,23 @@ class OverviewPage extends Component {
 
         <ActionButton
           onPress={() => {
-            this.props.navigation.navigate('Registry');
+            //console.warn('render: ' + AsyncStorage.getItem('isLoggedIn'));
+            //this.checkLogin();
+            // console.warn(this.getLoginStatus());
+            this.getLoginStatus();
+            //console.warn('In Render: ' + isLogged);
           }}
           offsetY={5}
           offsetX={5}
+          buttonColor="rgba(123, 239, 178, 1)"
+        />
+        <ActionButton
+          onPress={() => {
+            this.logout();
+            //console.warn('render: ' + this.isLoggedIn);
+          }}
+          offsetY={5}
+          offsetX={70}
           buttonColor="rgba(231,76,60,1)"
         />
       </>

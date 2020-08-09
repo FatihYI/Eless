@@ -36,9 +36,7 @@ class ProductRegistryInformation extends Component {
       Alert.alert(
         'Eingabefelder nicht vollständig ausgefüllt',
         'Bitte füllen sie alle Eingabefelder',
-        [
-          {text: 'OK', onPress: () => console.log('OK Pressed')},
-        ],
+        [{text: 'OK', onPress: () => console.log('OK Pressed')}],
         {cancelable: false},
       );
     }

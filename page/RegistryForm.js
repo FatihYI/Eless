@@ -31,7 +31,8 @@ class RegistryForm extends Component {
       email !== '' &&
       password !== ''
     ) {
-      fetch('http://192.168.0.36:3000/setUser', {
+      //connect to backend
+      fetch('http://192.168.0.210:3000/setUser', {
         method: 'POST',
         headers: {
           Accept: 'application/json',
