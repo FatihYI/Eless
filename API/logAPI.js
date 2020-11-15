@@ -1,5 +1,16 @@
 import React, {Component} from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
+import OverviewPage from '../page/OverviewPage';
+
+
+/*
+
++++++++++++++++++++++++++++++++++++++++++
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+DIESE KLASSE WIRD NICHT MEHR VERWENDET, STATTDESSEN LOGINFORM!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
++++++++++++++++++++++++++++++++++++++++++
+ */
 
 class logAPI extends Component {
   constructor() {
@@ -31,7 +42,8 @@ class logAPI extends Component {
           //this.initLoginData();
           this.setLogStatus('true');
           //console.warn('Before NAvigation: ' + this.getUserName());
-          props.navigation.goBack();
+          //this.props.navigation.goBack();
+          this.props.navigation.navigate('OverviewPage');
           //alert('Sie sind nun angemeldet');
         }
         if (json.message === -1) {
@@ -41,15 +53,16 @@ class logAPI extends Component {
       .done();
   }
 
+
+
   async logout() {
     try {
       //await AsyncStorage.setItem('isLoggedIn', this.isLoggedIn.toString());
 
       if ((await AsyncStorage.getItem('isLogged')) === 'true') {
         this.setLoginData('');
-        //await AsyncStorage.setItem('loginData', '');
+
         this.setLogStatus('false');
-        // await AsyncStorage.setItem('isLoggedIn', 'false');
 
         alert('Sie sind nun abgemeldet');
       } else {
@@ -68,26 +81,6 @@ class logAPI extends Component {
   setLogStatus = async (isLoggedIn) => {
     await AsyncStorage.setItem('isLogged', isLoggedIn);
   };
-
-  /*initLoginData = async () => {
-    //const {refresh} = this.state;
-
-    try {
-      const loginData = await AsyncStorage.getItem('loginData');
-      console.warn('loginData: ' + loginData);
-      //if (loginData !== null && refresh === false) {
-      //this.setUserLoginData(loginData);
-      this.setUserEmail(JSON.parse(loginData).email);
-      this.setUserName(JSON.parse(loginData).username);
-      this.setUserPassword(JSON.parse(loginData).password);
-      this.setUserFirstname(JSON.parse(loginData).firstname);
-      this.setUserLastname(JSON.parse(loginData).lastname);
-      //this.setState({refresh: true});
-      //}
-    } catch (err) {
-      console.warn(err);
-    }
-  };*/
 }
 
 const log = new logAPI();

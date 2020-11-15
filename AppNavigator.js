@@ -45,16 +45,4 @@ const AppNavigator = createStackNavigator({
   },
 });
 
-const Drawer = createDrawerNavigator({
-  a: {
-    screen: OverviewPage,
-  },
-  b: {
-    screen: ProductView,
-  },
-  c: {
-    screen: RegistryForm,
-  },
-});
-
 export default AppNavigator;

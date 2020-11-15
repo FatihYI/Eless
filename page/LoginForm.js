@@ -9,60 +9,14 @@ import {
   AsyncStorageStatic,
 } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
-import log from '../API/logAPI';
+//import log from '../API/logAPI';
 class LoginForm extends Component {
   constructor(props) {
     super(props);
 
     this.email = '';
     this.password = '';
-    /*this.state = {
-      //isLoggedIn: 'false',
-      email: '',
-      password: '',
-    };*/
   }
-
-  /*login = async () => {
-    const {email, password, isLoggedIn} = this.state;
-
-    //connect to backend
-    await fetch('http://192.168.0.210:3000/getUsers', {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        email: this.state.email,
-        password: this.state.password,
-
-        isLoggedIn: this.state.isLoggedIn,
-      }),
-    })
-      .then(async (response) => await response.json())
-      .then((json) => {
-        if (json.message !== -1) {
-          //console.warn(json.message);
-          //this.props.navigation.navigate('Product');
-          this.state.isLoggedIn = AsyncStorage.getItem('isLoggedIn');
-          //if (this.state.isLoggedIn === 'false') {
-          AsyncStorage.setItem('loginData', JSON.stringify(json.message));
-          AsyncStorage.setItem('isLoggedIn', JSON.stringify(true));
-          //this.Actions.pop('OverviewPage');
-          alert('Sie sind nun angemeldet');
-          //this.props.navigation.navigate('RegistryForm');
-          //} else {
-          // alert('Sie sind bereits angemeldet');
-          //}
-        }
-        if (json.message === -1) {
-          alert('Nutzer nicht vorhanden');
-          //this.state.isLoggedIn: false
-        }
-      })
-      .done();
-  };*/
 
   setEmail(email) {
     this.email = email;
@@ -82,13 +36,7 @@ class LoginForm extends Component {
             style={styles.textinput}
             placeholder={'Your Email'}
             underlineColorAndroid={'transparent'}
-            onChangeText={
-              /*(email) =>
-              this.setState({
-                email,
-              })*/
-              (email) => this.setEmail(email)
-            }
+            onChangeText={(email) => this.setEmail(email)}
           />
 
           <TextInput
@@ -96,18 +44,17 @@ class LoginForm extends Component {
             placeholder={'Your Password'}
             secureTextEntry={true}
             underlineColorAndroid={'transparent'}
-            onChangeText={
-              /*(password) =>
-              this.setState({
-                password,
-              })*/
-              (password) => this.setPassword(password)
-            }
+            onChangeText={(password) => this.setPassword(password)}
           />
 
           <TouchableOpacity
             style={styles.button}
-            onPress={() => log.login(this.email, this.password, this.props)}>
+            onPress={() =>
+              /*log.login(this.email, this.password, this.props)*/ this.login(
+                this.email,
+                this.password,
+              )
+            }>
             <Text style={styles.btntext}>Sign in</Text>
           </TouchableOpacity>
           <View style={styles.signupTextCont}>
@@ -123,6 +70,70 @@ class LoginForm extends Component {
       </View>
     );
   }
+
+  async login(email, password) {
+    //const {email, password, isLoggedIn} = this.state;
+    //alert('email: ' + email + '\npassword: ' + password);
+    //connect to backend
+    fetch('http://192.168.0.210:3000/getUsers', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email: email,
+        password: password,
+
+        //isLoggedIn: 'true',
+      }),
+    })
+      .then(async (response) => await response.json())
+      .then((json) => {
+        if (json.message !== -1) {
+          //console.warn('if Anweisunga girdi -1');
+          this.setLoginData(json.message);
+          //this.initLoginData();
+          this.setLogStatus('true');
+          //console.warn('Before NAvigation: ' + this.getUserName());
+          //this.props.navigation.goBack();
+          console.warn('Gehe zu OverviewPage');
+          this.props.navigation.navigate('OverviewPage');
+          //alert('Sie sind nun angemeldet');
+        }
+        if (json.message === -1) {
+          //alert('Nutzer nicht vorhanden');
+        }
+      })
+      .done();
+  }
+
+  async logout() {
+    try {
+      //await AsyncStorage.setItem('isLoggedIn', this.isLoggedIn.toString());
+
+      if ((await AsyncStorage.getItem('isLogged')) === 'true') {
+        this.setLoginData('');
+
+        this.setLogStatus('false');
+
+        alert('Sie sind nun abgemeldet');
+      } else {
+        alert('Sie sind bereits abgemeldet');
+      }
+      return true;
+    } catch (exception) {
+      return false;
+    }
+  }
+
+  setLoginData = async (msg) => {
+    await AsyncStorage.setItem('loginData', JSON.stringify(msg));
+  };
+
+  setLogStatus = async (isLoggedIn) => {
+    await AsyncStorage.setItem('isLogged', isLoggedIn);
+  };
 }
 
 const styles = StyleSheet.create({

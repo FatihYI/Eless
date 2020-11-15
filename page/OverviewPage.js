@@ -4,22 +4,13 @@ import OverviewCard from '../components/OverviewCard';
 import ActionButton from 'react-native-action-button';
 import {SearchBar, Icon} from 'react-native-elements';
 import _ from 'lodash';
-import awaitAsyncGenerator from '@babel/runtime/helpers/esm/awaitAsyncGenerator';
 import AsyncStorage from '@react-native-community/async-storage';
-import {DrawerNavigator} from 'react-navigation';
-import LoginForm from './LoginForm';
+
 
 class OverviewPage extends Component {
   constructor(props) {
     super(props);
     this.selectedPlaceIsSet = false;
-    //this.isLoggedIn;
-    //AsyncStorage.setItem('isLoggedIn', 'false');
-    //console.warn(AsyncStorage.getItem('isLoggedIn'));
-    //if (!AsyncStorage.getItem('isLoggedIn')) {
-    //AsyncStorage.setItem('isLoggedIn', 'true');
-    //console.warn(AsyncStorage.getItem('isLoggedIn'));
-    //}
     this.initLoginStatus();
   }
   state = {

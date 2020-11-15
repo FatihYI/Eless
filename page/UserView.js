@@ -7,7 +7,7 @@ import {
   View,
 } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
-import log from '../API/logAPI';
+//import log from '../API/logAPI';
 class UserView extends Component {
   constructor() {
     super();
@@ -74,8 +74,7 @@ class UserView extends Component {
       firstname = JSON.parse(this.loginData).firstname;
       lastname = JSON.parse(this.loginData).lastname;
 
-
-      console.warn("girdi");
+      console.warn('girdi');
     }
 
     return (
@@ -94,8 +93,6 @@ class UserView extends Component {
             <Text style={styles.textinput}>{email}</Text>
             <Text style={styles.subHeader}>Password:</Text>
             <Text style={styles.textinput}>{password}</Text>
-
-
           </View>
         </View>
       </ScrollView>
