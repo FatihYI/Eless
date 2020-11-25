@@ -1,51 +1,27 @@
 import React from 'react';
-import {createAppContainer} from 'react-navigation';
-import {Button, View} from 'react-native';
-import AppNavigator from './AppNavigator';
 import {NavigationContainer} from '@react-navigation/native';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import LoginForm from './page/LoginForm';
-import CityView from './page/CityView';
 import OverviewPage from './page/OverviewPage';
 import RegistryForm from './page/RegistryForm';
-
-function OverviewScreen({navigation}) {
-  return <AppContainer />;
-}
-
-function LoginScreen({navigation}) {
-  return <LoginForm />;
-}
-
-function RegistryScreen({navigation}) {
-  return <RegistryForm />;
-}
+import UserView from './page/UserView';
+import ProductView from './page/ProductView';
 
 const Drawer = createDrawerNavigator();
 
 export default function App() {
   return (
-    //<AppContainer>
     <NavigationContainer>
       <Drawer.Navigator initialRouteName="AppContainer">
         <Drawer.Screen
           name="OverviewPage"
-          component={OverviewScreen /*AppNavigator*/}
+          component={OverviewPage /*AppNavigator*/}
         />
-        <Drawer.Screen name="LoginForm" component={LoginScreen} />
-        <Drawer.Screen name="RegistryForm" component={RegistryScreen} />
+        <Drawer.Screen name="LoginForm" component={LoginForm} />
+        <Drawer.Screen name="RegistryForm" component={RegistryForm} />
+        <Drawer.Screen name="UserView" component={UserView} />
+        <Drawer.Screen name="Product" component={ProductView} />
       </Drawer.Navigator>
     </NavigationContainer>
-    //</AppContainer>
   );
 }
-
-/*const App = () => {
-  return (
-    <AppContainer />
-  );
-};*/
-
-const AppContainer = createAppContainer(AppNavigator);
-
-//export default App;

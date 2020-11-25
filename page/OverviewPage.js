@@ -6,7 +6,6 @@ import {SearchBar, Icon} from 'react-native-elements';
 import _ from 'lodash';
 import AsyncStorage from '@react-native-community/async-storage';
 
-
 class OverviewPage extends Component {
   constructor(props) {
     super(props);
@@ -24,15 +23,17 @@ class OverviewPage extends Component {
 
   filterPlaces = (products) => {
     let filterData = products;
-    if (this.props.navigation.state.params) {
-      console.warn(this.props.navigation.state.params.selectedPlace);
-      if (this.props.navigation.state.params.selectedPlace) {
-        this.selectedPlaceIsSet = true;
-        filterData = _.filter(products, {
-          place: this.props.navigation.state.params.selectedPlace,
-        });
-      } else {
-        this.selectedPlaceIsSet = false;
+    if (this.props.navigation.state) {
+      if (this.props.navigation.state.params) {
+        console.warn(this.props.navigation.state.params.selectedPlace);
+        if (this.props.navigation.state.params.selectedPlace) {
+          this.selectedPlaceIsSet = true;
+          filterData = _.filter(products, {
+            place: this.props.navigation.state.params.selectedPlace,
+          });
+        } else {
+          this.selectedPlaceIsSet = false;
+        }
       }
     }
 
@@ -46,31 +47,33 @@ class OverviewPage extends Component {
 
   displaySelectedPlace = () => {
     //alert('testMethod');
-    if (this.props.navigation.state.params) {
-      if (this.props.navigation.state.params.selectedPlace) {
-        return (
-          <TouchableOpacity
-            onPress={() => {
-              this.props.navigation.state.params.selectedPlace = null;
-              this.selectedPlaceIsSet = false;
-              this.setState({
-                refresh: false,
-              });
-            }}>
-            <View>
-              <Text style={{backgroundColor: 'grey', fontSize: 20}}>
-                {this.props.navigation.state.params.selectedPlace}
-              </Text>
-            </View>
-          </TouchableOpacity>
-        );
+    if (this.props.navigation.state) {
+      if (this.props.navigation.state.params) {
+        if (this.props.navigation.state.params.selectedPlace) {
+          return (
+            <TouchableOpacity
+              onPress={() => {
+                this.props.navigation.state.params.selectedPlace = null;
+                this.selectedPlaceIsSet = false;
+                this.setState({
+                  refresh: false,
+                });
+              }}>
+              <View>
+                <Text style={{backgroundColor: 'grey', fontSize: 20}}>
+                  {this.props.navigation.state.params.selectedPlace}
+                </Text>
+              </View>
+            </TouchableOpacity>
+          );
+        }
       }
     }
   };
 
   async test() {
     //connect to backend
-    await fetch('http://192.168.0.210:3000/getProducts', {
+    await fetch('http://192.168.0.36:3000/getProducts', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -141,7 +144,7 @@ class OverviewPage extends Component {
     let a = await AsyncStorage.getItem('isLogged');
     console.warn('getLogin: ' + a);
     if (a === 'false') {
-      this.props.navigation.navigate('Login');
+      this.props.navigation.navigate('LoginForm');
     } else if (a === 'true') {
       this.props.navigation.navigate('UserView');
     }
