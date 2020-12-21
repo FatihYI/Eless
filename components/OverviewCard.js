@@ -14,6 +14,13 @@ export default class OverviewCard extends Component {
             <Text style={styles.place}>{this.props.place}</Text>
             <Text style={styles.description}>{this.props.description}</Text>
             <Text style={styles.price}>{this.props.price}</Text>
+            {/*example code change it with icons*/}
+            {this.props.helal ? <Text>Helal</Text> : <Text>nicht Helal</Text>}
+            {this.props.vegetable ? (
+              <Text>Vegetable</Text>
+            ) : (
+              <Text>nicht Vegetable</Text>
+            )}
           </View>
         </View>
       </>
@@ -23,7 +30,7 @@ export default class OverviewCard extends Component {
 
 const styles = StyleSheet.create({
   cardContainer: {
-    height: 250,
+    height: 300, //ursprünglich 250
     backgroundColor: 'white',
     borderRadius: 5,
   },

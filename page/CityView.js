@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import OverviewPage from './OverviewPage';
+
 class ProductView extends Component {
   constructor(props) {
     super(props);
@@ -34,10 +35,9 @@ class ProductView extends Component {
               }}>
               Top Städte
             </Text>
-
             <TouchableOpacity
               onPress={() =>
-                this.props.navigation.navigate('Home', {
+                this.props.navigation.navigate('OverviewPage', {
                   selectedPlace: 'Herne',
                 })
               }>
@@ -56,7 +56,7 @@ class ProductView extends Component {
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() =>
-                this.props.navigation.navigate('Home', {
+                this.props.navigation.navigate('OverviewPage', {
                   selectedPlace: 'Oberhausen',
                 })
               }>
@@ -71,6 +71,101 @@ class ProductView extends Component {
                   borderTopStyle: 'solid',
                 }}>
                 <Text style={{flex: 1, textAlign: 'left'}}>Oberhausen</Text>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() =>
+                this.props.navigation.navigate('OverviewPage', {
+                  selectedPlace: 'Gelsenkirchen',
+                })
+              }>
+              <View
+                style={{
+                  textAlign: 'right',
+                  flexDirection: 'row',
+                  padding: 3,
+
+                  borderTopWidth: 2,
+                  borderTopColor: '#E9E8E8',
+                  borderTopStyle: 'solid',
+                }}>
+                <Text style={{flex: 1, textAlign: 'left'}}>Gelsenkirchen</Text>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() =>
+                this.props.navigation.navigate('OverviewPage', {
+                  selectedPlace: 'Marl',
+                })
+              }>
+              <View
+                style={{
+                  textAlign: 'right',
+                  flexDirection: 'row',
+                  padding: 3,
+
+                  borderTopWidth: 2,
+                  borderTopColor: '#E9E8E8',
+                  borderTopStyle: 'solid',
+                }}>
+                <Text style={{flex: 1, textAlign: 'left'}}>Marl</Text>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() =>
+                this.props.navigation.navigate('OverviewPage', {
+                  selectedPlace: 'Dortmund',
+                })
+              }>
+              <View
+                style={{
+                  textAlign: 'right',
+                  flexDirection: 'row',
+                  padding: 3,
+
+                  borderTopWidth: 2,
+                  borderTopColor: '#E9E8E8',
+                  borderTopStyle: 'solid',
+                }}>
+                <Text style={{flex: 1, textAlign: 'left'}}>Dortmund</Text>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() =>
+                this.props.navigation.navigate('OverviewPage', {
+                  selectedPlace: 'Recklinghausen',
+                })
+              }>
+              <View
+                style={{
+                  textAlign: 'right',
+                  flexDirection: 'row',
+                  padding: 3,
+
+                  borderTopWidth: 2,
+                  borderTopColor: '#E9E8E8',
+                  borderTopStyle: 'solid',
+                }}>
+                <Text style={{flex: 1, textAlign: 'left'}}>Recklinghausen</Text>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() =>
+                this.props.navigation.navigate('OverviewPage', {
+                  selectedPlace: 'Herten',
+                })
+              }>
+              <View
+                style={{
+                  textAlign: 'right',
+                  flexDirection: 'row',
+                  padding: 3,
+
+                  borderTopWidth: 2,
+                  borderTopColor: '#E9E8E8',
+                  borderTopStyle: 'solid',
+                }}>
+                <Text style={{flex: 1, textAlign: 'left'}}>Herten</Text>
               </View>
             </TouchableOpacity>
           </View>
